@@ -27,3 +27,8 @@ a <- 1:5
 b <- 4:7
 intersect(a, b)
 union(a, b)
+setdiff(a,b)
+setdiff(b,a)
+union(a,b)
+setequal(a,b)
+a %in% b
