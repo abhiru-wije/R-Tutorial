@@ -51,4 +51,64 @@ mpg %>%
   theme_bw()
 
 
-https://www.youtube.com/watch?v=HPJn1CMvtmI&list=PLtL57Fdbwb_C6RS0JtBojTNOMVlgpeJkS
+#https://www.youtube.com/watch?v=HPJn1CMvtmI&list=PLtL57Fdbwb_C6RS0JtBojTNOMVlgpeJkS
+
+
+# ggplot tutorial 2
+library(tidyverse)
+View(mpg)
+?mpg
+
+mpg %>%
+  filter(hwy < 35) %>%
+  ggplot(aes(displ,
+             hwy,
+             color = drv)) +
+  geom_point() +
+  geom_smooth(method = lm, se = F) +
+  labs(x = " Engine size", 
+       y = "MPG on the Highway", 
+       title = "Fuel efficiency") +
+  theme_bw()
+  
+# ggplot tutorial 3
+library(tidyverse)
+?msleep  
+view(msleep)
+names(msleep)
+
+# single categorical
+
+msleep %>%
+  drop_na(vore) %>% #drop NA values in Vore column, if you want to drop all NA
+  # you should write drop_na()
+  ggplot(aes(vore)) +
+  geom_bar(fill = "#529DFE") +
+  # coord_flip() + #flip plot other side
+  theme_bw() +
+  labs(title = "Number of observations per order")
+  
+# use fct_infreq(vore) to create order which means you can take highest number of bar
+# to first place
+
+# single numeric
+
+msleep   %>%
+  ggplot(aes(awake)) +
+  geom_histogram(binwidth = 2, fill = "#529DFE") +
+  theme_bw() +
+  labs(x = "Total sleep",
+       y = NULL,
+       title = "Histogram of total sleep")
+# binwidth is a function with, each bin contains 0-2, 2-4, 4-6 likewise,
+# if you enter binwidth = 4 then it contains 0-4,4-8
+
+msleep %>%
+  filter(bodywt < 2) %>%
+  ggplot(aes(bodywt, brainwt)) +
+  geom_point() +
+  geom_smooth() +
+  labs(x = "Body Weight",
+       y = "Brain Weight",
+       title = "Brain and body Weight") +
+  theme_bw()
